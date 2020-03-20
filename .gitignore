@@ -9,6 +9,8 @@ inference_test_output
 *.txt
 *.json
 *.diff
+*.mp4
+*.webm
 
 # compilation and distribution
 __pycache__
