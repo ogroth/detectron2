@@ -11,6 +11,7 @@ inference_test_output
 *.diff
 *.mp4
 *.webm
+*.npz
 
 # compilation and distribution
 __pycache__
