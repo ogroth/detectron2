@@ -98,16 +98,20 @@ class VideoVisualizer:
         else:
             alpha = 0.5
 
-        frame_visualizer.overlay_instances(
-            boxes=None if masks is not None else boxes,  # boxes are a bit distracting
-            masks=masks,
-            labels=labels,
-            keypoints=keypoints,
-            assigned_colors=colors,
-            alpha=alpha,
-        )
+        try:
+            frame_visualizer.overlay_instances(
+                boxes=None if masks is not None else boxes,  # boxes are a bit distracting
+                masks=masks,
+                labels=labels,
+                keypoints=keypoints,
+                assigned_colors=colors,
+                alpha=alpha,
+            )  # throws IndexError for same masks
+            frame_viz = frame_visualizer.output
+        except Exception as err:
+            frame_viz = frame  # HACK: return input frame, if visualizer fails
 
-        return frame_visualizer.output
+        return frame_viz
 
     def draw_sem_seg(self, frame, sem_seg, area_threshold=None):
         """
